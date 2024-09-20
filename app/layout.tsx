@@ -22,7 +22,12 @@ export default async function RootLayout({
   const user = await supabase.auth.getUser();
   return (
     <html lang="en">
-      <body className={cn("antialiased", GeistSans.className)}>
+      <body
+        className={cn(
+          "antialiased w-full h-screen overflow-hidden flex flex-col gap-0",
+          GeistSans.className
+        )}
+      >
         <AppProvider>
           <TopBar user={user.data.user ?? null} />
           {children}
