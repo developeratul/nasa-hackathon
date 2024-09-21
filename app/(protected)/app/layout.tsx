@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { LocationProvider } from "@/providers/location";
 import { AppProps } from "@/types";
 import { CloudSunIcon, LayoutDashboardIcon, PickaxeIcon, VeganIcon } from "lucide-react";
 import Link from "next/link";
@@ -35,7 +36,9 @@ export default function AppLayout(props: AppProps) {
             ))}
           </div>
         </aside>
-        <div className="w-full flex-1 p-6 overflow-x-hidden">{children}</div>
+        <div className="w-full flex-1 p-6 overflow-x-hidden">
+          <LocationProvider>{children}</LocationProvider>
+        </div>
       </div>
     </div>
   );

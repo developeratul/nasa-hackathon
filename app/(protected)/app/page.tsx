@@ -1,31 +1,13 @@
-export default function DashboardPage() {
+import CurrentWeather from "@/components/dashboard/CurrentWeather";
+
+export default async function DashboardPage() {
   return (
-    <div>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage</h1>
-      <h1 className="text-7xl">DashboardPage last</h1>
-    </div>
+    <main>
+      <div className="grid grid-cols-3 gap-6">
+        <CurrentWeather />
+        <CurrentWeather />
+        <CurrentWeather />
+      </div>
+    </main>
   );
 }

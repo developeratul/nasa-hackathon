@@ -1,4 +1,4 @@
-export default function WeatherPage() {
+export default async function WeatherPage() {
   return (
     <div>
       <h1>WeatherPage</h1>
