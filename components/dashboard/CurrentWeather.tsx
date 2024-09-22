@@ -106,8 +106,8 @@ export default function CurrentWeather() {
             <p className="text-base font-medium">{data.wind} km/h</p>
           </div>
           <div className="space-y-0 flex flex-col justify-center items-center">
-            <h4 className="text-xs font-medium text-muted-foreground">Clouds</h4>
-            <p className="text-base font-medium">{data.clouds}%</p>
+            <h4 className="text-xs font-medium text-muted-foreground">Humidity</h4>
+            <p className="text-base font-medium">{data.humidity}%</p>
           </div>
           <div className="space-y-0 flex flex-col justify-center items-center">
             <h4 className="text-xs font-medium text-muted-foreground">Pressure</h4>

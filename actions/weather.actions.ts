@@ -24,6 +24,7 @@ export async function getCurrentWeather(location: CurrentLocation) {
       sunset: data.sys.sunset,
       wind: data.wind.speed,
       pressure: data.main.pressure,
+      humidity: data.main.humidity,
     } as CurrentWeather;
   } catch (err) {
     if (err instanceof AxiosError) {

@@ -27,10 +27,10 @@ export function LocationProvider(props: AppProps) {
     getInitialValueInEffect: true,
   });
 
-  const enableLocationAccess = useCallback(() => {
+  const requestLocationAccess = useCallback(() => {
     if (coordinates) return;
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
+      navigator.geolocation.getCurrentPosition((position) => {
         setCoordinates({
           lat: position.coords.latitude,
           lon: position.coords.longitude,
@@ -43,8 +43,8 @@ export function LocationProvider(props: AppProps) {
 
   useEffect(() => {
     setRendered(true);
-    enableLocationAccess();
-  }, [enableLocationAccess]);
+    requestLocationAccess();
+  }, [requestLocationAccess]);
 
   if (!isRendered)
     return (
@@ -65,7 +65,7 @@ export function LocationProvider(props: AppProps) {
                 Enable location access so we can provide you with accurate farming services tailored
                 to your area!{" "}
                 <Button
-                  onClick={enableLocationAccess}
+                  onClick={requestLocationAccess}
                   variant="link"
                   size="sm"
                   className="px-0 py-0 h-auto"

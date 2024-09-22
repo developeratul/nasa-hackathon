@@ -12,4 +12,5 @@ export interface CurrentWeather {
   pressure: number;
   status: string;
   icon: string;
+  humidity: number;
 }
