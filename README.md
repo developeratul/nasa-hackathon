@@ -11,6 +11,11 @@ Npm > v.10
 
 ### Run those commands in order
 
+```bash
+cp .env.example -r .env.local
+# Update the .env.local file accordingly
+```
+
 ```
 npm install -g pnpm
 pnpm install
