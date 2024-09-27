@@ -19,7 +19,7 @@ export default async function DashboardPage() {
           {getTimeBasedGreeting()},{" "}
           <span className="font-semibold text-primary">{data.user?.user_metadata.full_name}</span>
         </h2>
-        <Badge variant="outline" className="py-2 text-sm text-muted-foreground">
+        <Badge variant="outline" className="py-2 bg-white text-sm text-muted-foreground">
           <CalendarIcon className="w-4 h-4 mr-3 text-primary" />
           {dayjs(new Date()).format("DD MMM, YYYY")}
         </Badge>

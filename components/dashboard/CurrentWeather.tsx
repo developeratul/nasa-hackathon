@@ -10,7 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getFlagUrl, getWeatherStatusIconUrl, kelvinToCelsius } from "@/helpers/weather";
+import {
+  getFlagUrl,
+  getWeatherStatusIconUrl,
+  kelvinToCelsius,
+  mph_to_kmh,
+} from "@/helpers/weather";
 import { useLocation } from "@/providers/location";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { useQuery } from "@tanstack/react-query";
@@ -21,12 +26,17 @@ import Loader from "../common/Loader";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 
-export default function CurrentWeather() {
+export function useCurrentWeatherData() {
   const { coordinates } = useLocation();
-  const { data, isPending, isError, error } = useQuery({
+  return useQuery({
     queryKey: ["get-current-weather"],
     queryFn: () => getCurrentWeather({ lat: coordinates.lat, lon: coordinates.lon }),
   });
+}
+
+export default function CurrentWeather(props: { isSummarized?: boolean }) {
+  const { isSummarized = false } = props;
+  const { data, error, isPending, isError } = useCurrentWeatherData();
 
   if (isPending) {
     return (
@@ -100,28 +110,32 @@ export default function CurrentWeather() {
             </Badge>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-6 divide-x">
-          <div className="space-y-0 flex flex-col justify-center items-center">
-            <h4 className="text-xs font-medium text-muted-foreground">Wind</h4>
-            <p className="text-base font-medium">{data.wind} km/h</p>
+        {!isSummarized && (
+          <div className="grid grid-cols-3 gap-6 divide-x">
+            <div className="space-y-0 flex flex-col justify-center items-center">
+              <h4 className="text-xs font-medium text-muted-foreground">Wind</h4>
+              <p className="text-base font-medium">{mph_to_kmh(data.wind)} km/h</p>
+            </div>
+            <div className="space-y-0 flex flex-col justify-center items-center">
+              <h4 className="text-xs font-medium text-muted-foreground">Humidity</h4>
+              <p className="text-base font-medium">{data.humidity}%</p>
+            </div>
+            <div className="space-y-0 flex flex-col justify-center items-center">
+              <h4 className="text-xs font-medium text-muted-foreground">Pressure</h4>
+              <p className="text-base font-medium">{data.pressure} mb</p>
+            </div>
           </div>
-          <div className="space-y-0 flex flex-col justify-center items-center">
-            <h4 className="text-xs font-medium text-muted-foreground">Humidity</h4>
-            <p className="text-base font-medium">{data.humidity}%</p>
-          </div>
-          <div className="space-y-0 flex flex-col justify-center items-center">
-            <h4 className="text-xs font-medium text-muted-foreground">Pressure</h4>
-            <p className="text-base font-medium">{data.pressure} mb</p>
-          </div>
-        </div>
+        )}
       </CardContent>
-      <CardFooter>
-        <Link href="/app/weather" className="block min-w-full">
-          <Button variant="secondary" className="w-full">
-            View Details
-          </Button>
-        </Link>
-      </CardFooter>
+      {!isSummarized && (
+        <CardFooter>
+          <Link href="/app/weather" className="block min-w-full">
+            <Button variant="secondary" className="w-full">
+              View Details
+            </Button>
+          </Link>
+        </CardFooter>
+      )}
     </Card>
   );
 }

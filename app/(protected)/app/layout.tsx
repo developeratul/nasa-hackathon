@@ -36,7 +36,7 @@ export default function AppLayout(props: AppProps) {
             ))}
           </div>
         </aside>
-        <div className="w-full flex-1 p-6 overflow-x-hidden">
+        <div className="w-full flex-1 bg-gray-50/70 p-6 overflow-x-hidden">
           <LocationProvider>{children}</LocationProvider>
         </div>
       </div>
