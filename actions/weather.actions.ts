@@ -25,6 +25,7 @@ export async function getCurrentWeather(location: CurrentLocation) {
       wind: data.wind.speed,
       pressure: data.main.pressure,
       humidity: data.main.humidity,
+      visibility: data.visibility,
     } as CurrentWeather;
   } catch (err) {
     if (err instanceof AxiosError) {

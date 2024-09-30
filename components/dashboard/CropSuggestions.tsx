@@ -10,13 +10,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "../ui/badge";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 export default function CropSuggestions() {
   return (
     <Card>
-      <CardHeader className="text-xl font-semibold tracking-tight text-primary">
-        Crop Suggestions
+      <CardHeader>
+        <CardTitle>Crop Suggestions</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>

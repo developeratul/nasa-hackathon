@@ -8,13 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 export default function LastSoilConditionReport() {
   return (
     <Card>
-      <CardHeader className="text-xl font-semibold tracking-tight text-primary">
-        Last Soil Condition Report
+      <CardHeader>
+        <CardTitle>Last Soil Condition Report</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>

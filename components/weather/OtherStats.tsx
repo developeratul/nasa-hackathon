@@ -1,6 +1,7 @@
 "use client";
+import { kelvinToCelsius } from "@/helpers/weather";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { FlameIcon, WindIcon } from "lucide-react";
+import { EyeIcon, FlameIcon, ThermometerIcon, WindIcon } from "lucide-react";
 import Loader from "../common/Loader";
 import { useCurrentWeatherData } from "../dashboard/CurrentWeather";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
@@ -34,28 +35,38 @@ export default function OtherStats() {
           <FlameIcon className="w-8 h-8 text-muted-foreground" />
           <div>
             <p className="text-sm text-muted-foreground">Humidity</p>
-            <span className="font-semibold text-lg text-primary">{data.humidity}%</span>
+            <span className="font-semibold text-lg text-primary">
+              {data.humidity}
+              <span className="text-xs text-muted-foreground">%</span>
+            </span>
           </div>
         </div>
         <div className="flex items-center justify-center gap-3 py-6">
           <WindIcon className="w-8 h-8 text-muted-foreground" />
           <div>
             <p className="text-sm text-muted-foreground">Pressure</p>
-            <span className="font-semibold text-lg text-primary">{data.pressure} hPa</span>
+            <span className="font-semibold text-lg text-primary">
+              {data.pressure} <span className="text-xs text-muted-foreground">hPa</span>
+            </span>
           </div>
         </div>
         <div className="flex items-center justify-center gap-3 py-6">
-          <WindIcon className="w-8 h-8 text-muted-foreground" />
+          <EyeIcon className="w-8 h-8 text-muted-foreground" />
           <div>
             <p className="text-sm text-muted-foreground">Visibility</p>
-            <span className="font-semibold text-lg text-primary">{data.clouds} hPa</span>
+            <span className="font-semibold text-lg text-primary">
+              {(data.visibility / 1000).toFixed(2)}{" "}
+              <span className="text-xs text-muted-foreground">km</span>
+            </span>
           </div>
         </div>
         <div className="flex items-center justify-center gap-3 py-6">
-          <WindIcon className="w-8 h-8 text-muted-foreground" />
+          <ThermometerIcon className="w-8 h-8 text-muted-foreground" />
           <div>
             <p className="text-sm text-muted-foreground">Feels Like</p>
-            <span className="font-semibold text-lg text-primary">{data.pressure} hPa</span>
+            <span className="font-semibold text-lg text-primary">
+              {kelvinToCelsius(data.feels_like)}&deg;
+            </span>
           </div>
         </div>
       </div>

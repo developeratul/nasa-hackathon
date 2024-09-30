@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "update-types": "supabase gen types typescript > types/supabase.ts --db-url postgresql://postgres:postgres@127.0.0.1:54352/postgres"
+    "update-types": "supabase gen types --lang=typescript --project-id wtrqflylwdzakszdfujh --schema public > types/supabase.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -44,6 +44,7 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.53.0",
     "recharts": "^2.12.7",
     "sonner": "^1.5.0",

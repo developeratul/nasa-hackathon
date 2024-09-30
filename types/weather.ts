@@ -14,6 +14,7 @@ export interface CurrentWeather {
   status: string;
   icon: string;
   humidity: number;
+  visibility: number;
 }
 
 export interface WeatherForecast extends CurrentWeather {

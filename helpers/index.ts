@@ -26,3 +26,7 @@ export function getTimeBasedGreeting(date: Date = new Date()): string {
     return "Good night";
   }
 }
+
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

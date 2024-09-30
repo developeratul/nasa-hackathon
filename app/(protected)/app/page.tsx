@@ -1,6 +1,9 @@
-import CropSuggestions from "@/components/dashboard/CropSuggestions";
+import PreviousCropRecommendations from "@/components/crop-recommendation/PreviousCropRecommendations";
 import CurrentWeather from "@/components/dashboard/CurrentWeather";
 import LastSoilConditionReport from "@/components/dashboard/LastSoilConditionReport";
+import PhLevelGraph from "@/components/dashboard/PhLevelGraph";
+import SuggestedCropsGraph from "@/components/dashboard/SuggestedCropsGraph";
+import TemperatureGraph from "@/components/dashboard/TemperatureGraph";
 import WeatherMap from "@/components/dashboard/WeatherMap";
 import { Badge } from "@/components/ui/badge";
 import { getTimeBasedGreeting } from "@/helpers";
@@ -28,11 +31,17 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-3 gap-6">
           <CurrentWeather />
           <WeatherMap />
+          <TemperatureGraph />
+          <div className="space-y-6">
+            <SuggestedCropsGraph />
+            <PhLevelGraph />
+          </div>
+          <div className="col-span-2 h-full space-y-6">
+            <LastSoilConditionReport />
+            <PreviousCropRecommendations />
+          </div>
         </div>
-        <div className="grid grid-cols-2 gap-6">
-          <CropSuggestions />
-          <LastSoilConditionReport />
-        </div>
+        <div className="grid grid-cols-2 gap-6"></div>
       </div>
     </main>
   );
