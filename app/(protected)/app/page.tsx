@@ -46,3 +46,5 @@ export default async function DashboardPage() {
     </main>
   );
 }
+
+export const dynamic = "force-dynamic";
