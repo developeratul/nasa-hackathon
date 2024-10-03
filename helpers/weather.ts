@@ -50,3 +50,18 @@ export function getAirQualityBadgeClassName(index: number) {
   };
   return classNames[index];
 }
+
+export function calculateSunlightHours(sunrise: number, sunset: number): number {
+  // Convert Unix timestamps to Date objects in UTC
+  const sunriseDate = new Date(sunrise * 1000); // Multiply by 1000 to convert to milliseconds
+  const sunsetDate = new Date(sunset * 1000);
+
+  // Get the time difference in milliseconds
+  const differenceInMilliseconds = sunsetDate.getTime() - sunriseDate.getTime();
+
+  // Convert the difference to hours (3600 seconds in an hour, 1000 milliseconds in a second)
+  const sunlightHours = differenceInMilliseconds / (1000 * 3600);
+
+  // Return the total sunlight hours as a number
+  return sunlightHours;
+}

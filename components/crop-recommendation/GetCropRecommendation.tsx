@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CloudUpload } from "lucide-react";
 import Dropzone from "react-dropzone";
 import { toast } from "sonner";
@@ -29,12 +29,16 @@ export default function GetCropRecommendationForm() {
     mutationKey: ["get-crop-recommendation"],
     mutationFn: () => generateCropRecommendation(),
   });
+  const queryClient = useQueryClient();
 
   const handleGetCropRecommendation = async () => {
     try {
       toast.promise(mutateAsync(), {
         loading: "Getting expert recommendation...",
         success: (data) => data.message,
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["get-previous-crop-recommendations"],
       });
     } catch (err) {
       if (err instanceof Error) {

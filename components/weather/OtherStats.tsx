@@ -35,7 +35,7 @@ export default function OtherStats() {
           <FlameIcon className="w-8 h-8 text-muted-foreground" />
           <div>
             <p className="text-sm text-muted-foreground">Humidity</p>
-            <span className="font-semibold text-lg text-primary">
+            <span className="font-semibold text-lg text-black">
               {data.humidity}
               <span className="text-xs text-muted-foreground">%</span>
             </span>
@@ -45,7 +45,7 @@ export default function OtherStats() {
           <WindIcon className="w-8 h-8 text-muted-foreground" />
           <div>
             <p className="text-sm text-muted-foreground">Pressure</p>
-            <span className="font-semibold text-lg text-primary">
+            <span className="font-semibold text-lg text-black">
               {data.pressure} <span className="text-xs text-muted-foreground">hPa</span>
             </span>
           </div>
@@ -54,7 +54,7 @@ export default function OtherStats() {
           <EyeIcon className="w-8 h-8 text-muted-foreground" />
           <div>
             <p className="text-sm text-muted-foreground">Visibility</p>
-            <span className="font-semibold text-lg text-primary">
+            <span className="font-semibold text-lg text-black">
               {(data.visibility / 1000).toFixed(2)}{" "}
               <span className="text-xs text-muted-foreground">km</span>
             </span>
@@ -64,7 +64,7 @@ export default function OtherStats() {
           <ThermometerIcon className="w-8 h-8 text-muted-foreground" />
           <div>
             <p className="text-sm text-muted-foreground">Feels Like</p>
-            <span className="font-semibold text-lg text-primary">
+            <span className="font-semibold text-lg text-black">
               {kelvinToCelsius(data.feels_like)}&deg;
             </span>
           </div>

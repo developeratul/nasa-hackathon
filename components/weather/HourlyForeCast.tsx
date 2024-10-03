@@ -59,7 +59,7 @@ export default function HourlyForeCast() {
                       height={50}
                     />
                   </div>
-                  <p className="text-base font-semibold text-primary">
+                  <p className="text-base font-semibold text-black">
                     {kelvinToCelsius(forecast.temp)}&deg;
                   </p>
                 </div>
@@ -70,7 +70,7 @@ export default function HourlyForeCast() {
                   >
                     <Image src={DirectionSrc} alt="Wind Direction Icon" width={35} height={35} />
                   </div>
-                  <p className="text-sm font-medium text-primary">
+                  <p className="text-sm font-medium text-black">
                     {mph_to_kmh(forecast.wind)}{" "}
                     <span className="text-xs text-muted-foreground">km/h</span>
                   </p>
