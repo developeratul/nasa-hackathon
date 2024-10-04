@@ -30,7 +30,7 @@ export default function TopBar(props: { user: User | null }) {
     <nav className="w-full sticky top-0 left-0 px-6 sm:px-12 md:px-24 bg-white dark:bg-card border-b py-4 h-[75px]">
       <div className="flex justify-between w-full items-center h-full">
         <Link href="/">
-          <h4 className="text-lg font-semibold tracking-tight">{config.name}</h4>
+          <h4 className="text-lg font-semibold">{config.name}</h4>
         </Link>
         {user ? (
           <DropdownMenu>

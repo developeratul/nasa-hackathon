@@ -4,26 +4,31 @@ import DashboardSrc from "@/assets/dashboard.jpeg";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import Link from "next/link";
 
 export default function Hero() {
   return (
     <header className="py-24 flex justify-center items-center">
       <div className="flex flex-col justify-center gap-y-12 items-center">
-        <div className="container max-w-4xl flex flex-col justify-center items-center gap-6 text-center">
-          <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-primary">
+        <div className="container max-w-5xl flex flex-col justify-center items-center gap-6 text-center">
+          <Badge variant="outline" className="text-base">Revolultionailzing Farming</Badge>
+          <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-primary">
             Let data do the heavy lifting while you reap the rewards.
           </h1>
-          <p className="max-w-3xl text-base font-medium text-muted-foreground">
+          <p className="max-w-5xl text-xl font-medium text-muted-foreground">
             We help farmers thrive with user-friendly tools! Our personalized dashboard offers crop
             suggestions and weather updates, making it easy to make smart decisions. With insights
             and best practices at your fingertips, you'll boost yields and save time. Let's farm
             smarter together!
           </p>
-          <Button size="lg">
-            Get Started <ArrowRightIcon className="w-4 h-4 ml-2" />
+          <Link href="/app">
+          <Button size="lg" className="text-lg h-auto min-h-12">
+            Get Started <ArrowRightIcon className="w-5 h-5 ml-2" />
           </Button>
+          </Link>
         </div>
-        <div className="max-w-4xl">
+        <div className="max-w-5xl">
           <Image
             src={DashboardSrc}
             alt="Dashboard demo image"

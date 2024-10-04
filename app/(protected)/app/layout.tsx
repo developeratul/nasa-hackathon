@@ -3,7 +3,7 @@ import GrowthSuggestion from "@/components/growth-suggestion";
 import { Button } from "@/components/ui/button";
 import { LocationProvider } from "@/providers/location";
 import { AppProps } from "@/types";
-import { CloudSunIcon, LayoutDashboardIcon, VeganIcon } from "lucide-react";
+import { CloudSunIcon, LayoutDashboardIcon, RatIcon, UsersIcon, VeganIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,6 +11,10 @@ const links = [
   { label: "Dashboard", href: "/app", icon: LayoutDashboardIcon },
   { label: "Weather", href: "/app/weather", icon: CloudSunIcon },
   { label: "Crop Recommendation", href: "/app/crop-recommendation", icon: VeganIcon },
+  { label: "Rice Disease", href: "/app/rice-disease", icon: RatIcon },
+  { label: "Corn Disease", href: "/app/corn-disease", icon: RatIcon },
+  { label: "Jute Disease", href: "/app/jute-disease", icon: RatIcon },
+  { label: "Community", href: "/app/community", icon: UsersIcon },
   // { label: "Soil Condition", href: "/app/soil-condition", icon: PickaxeIcon },
 ];
 

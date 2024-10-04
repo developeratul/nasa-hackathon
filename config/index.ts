@@ -1,5 +1,5 @@
 const config = {
-  name: "NASA",
+  name: "The Astros",
 };
 
 export default config;
