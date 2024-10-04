@@ -37,8 +37,8 @@ export default async function DashboardPage() {
             <PhLevelGraph />
           </div>
           <div className="col-span-2 h-full space-y-6">
+            <PreviousCropRecommendations isSummarized />
             <LastSoilConditionReport />
-            <PreviousCropRecommendations />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-6"></div>

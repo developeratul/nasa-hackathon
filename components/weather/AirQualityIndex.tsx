@@ -10,12 +10,16 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
-export default function AirQualityIndex() {
+export function useAirQualityIndexQuery() {
   const { coordinates } = useLocation();
-  const { isPending, isError, error, data } = useQuery({
+  return useQuery({
     queryKey: ["get-air-quality-index"],
     queryFn: () => getAirQualityIndex({ lat: coordinates.lat, lon: coordinates.lon }),
   });
+}
+
+export default function AirQualityIndex() {
+  const { isPending, isError, error, data } = useAirQualityIndexQuery();
 
   if (isPending) {
     return (

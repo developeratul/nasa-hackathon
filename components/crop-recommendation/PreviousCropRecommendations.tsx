@@ -10,12 +10,15 @@ import {
 } from "@/components/ui/table";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import Loader from "../common/Loader";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
-export default function PreviousCropRecommendations() {
+export default function PreviousCropRecommendations(props: { isSummarized?: boolean }) {
+  const { isSummarized = false } = props;
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["get-previous-crop-recommendations"],
     queryFn: () => getCropRecommendations(),
@@ -39,10 +42,12 @@ export default function PreviousCropRecommendations() {
     );
   }
 
+  const array = isSummarized ? data.slice(0, 3) : data;
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Previous Recommendations</CardTitle>
+        <CardTitle>Previous Crop Recommendations</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -54,8 +59,8 @@ export default function PreviousCropRecommendations() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((recommendation) => (
-              <TableRow key={recommendation.id}>
+            {array.map((recommendation) => (
+              <TableRow key={recommendation.id} className="last:border-0">
                 <TableCell className="font-semibold min-w-[100px]">
                   {recommendation.soilType}
                 </TableCell>
@@ -71,6 +76,17 @@ export default function PreviousCropRecommendations() {
                 <TableCell>{recommendation.suggestion}</TableCell>
               </TableRow>
             ))}
+            {isSummarized && (
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <Link href="/app/crop-recommendation">
+                    <Button variant="secondary" className="w-full">
+                      Show More
+                    </Button>
+                  </Link>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </CardContent>

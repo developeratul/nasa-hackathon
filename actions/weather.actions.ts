@@ -88,3 +88,18 @@ export async function getAirQualityIndex(location: CurrentLocation) {
     throw new Error((err as Error)?.message || "Unknown Error Occurred");
   }
 }
+
+export async function getWeatherSummary(params: {
+  temperature: number;
+  humidity: number;
+  air_condition_index: [number, number, number, number];
+  wind_speed: number;
+  air_pressure: number;
+}) {
+  try {
+    const { data } = await axios.post("http://127.0.0.1:8000/weather-suggestion", params);
+    return data;
+  } catch (err) {
+    throw new Error((err as Error)?.message || "Unknown Error Occurred");
+  }
+}
