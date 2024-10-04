@@ -25,3 +25,5 @@ pnpm dev
 ### Preview the app
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+Server [https://github.com/sartizalamayon/nsac-model] (https://github.com/sartizalamayon/nsac-model). Pull from the `non-prod` branch.
