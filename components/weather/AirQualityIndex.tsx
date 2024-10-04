@@ -49,25 +49,25 @@ export default function AirQualityIndex() {
         <div className="grid divide-x grid-cols-4">
           <div className="flex gap-y-1 flex-col text-center items-center justify-center">
             <p className="text-sm text-muted-foreground">PM2.5</p>
-            <span className="font-semibold text-lg text-black">{data.pm2_5}</span>
+            <span className="font-semibold text-lg">{data.pm2_5}</span>
           </div>
           <div className="flex gap-y-1 flex-col text-center items-center justify-center">
             <p className="text-sm text-muted-foreground">
               SO<sub>2</sub>
             </p>
-            <span className="font-semibold text-lg text-black">{data.so2}</span>
+            <span className="font-semibold text-lg">{data.so2}</span>
           </div>
           <div className="flex gap-y-1 flex-col text-center items-center justify-center">
             <p className="text-sm text-muted-foreground">
               NO<sub>2</sub>
             </p>
-            <span className="font-semibold text-lg text-black">{data.no2}</span>
+            <span className="font-semibold text-lg">{data.no2}</span>
           </div>
           <div className="flex gap-y-1 flex-col text-center items-center justify-center">
             <p className="text-sm text-muted-foreground">
               O<sub>3</sub>
             </p>
-            <span className="font-semibold text-lg text-black">{data.o3}</span>
+            <span className="font-semibold text-lg">{data.o3}</span>
           </div>
         </div>
       </CardContent>

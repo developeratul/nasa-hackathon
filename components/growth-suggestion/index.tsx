@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { calculateSunlightHours, kelvinToCelsius } from "@/helpers/weather";
 import { cn } from "@/lib/utils";
-import { fertilizerTypes, soilTypes, waterFrequencies } from "@/types/soil";
+import { fertilizerTypes, soilCategories, soilTypes, waterFrequencies } from "@/types/soil";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDisclosure } from "@mantine/hooks";
 import { useMutation } from "@tanstack/react-query";
@@ -33,7 +33,7 @@ import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 
 export const getGrowthSuggestionSchema = z.object({
-  soilType: z.enum(soilTypes),
+  soilType: z.enum(soilCategories),
   waterFrequency: z.enum(waterFrequencies),
   fertilizerType: z.enum(fertilizerTypes),
   // sunLightHours: z.number(),
@@ -124,7 +124,7 @@ export default function GrowthSuggestion() {
                         <SelectValue placeholder="Select" />
                       </SelectTrigger>
                       <SelectContent>
-                        {soilTypes.map((value) => (
+                        {soilCategories.map((value) => (
                           <SelectItem key={value} value={value}>
                             {value}
                           </SelectItem>

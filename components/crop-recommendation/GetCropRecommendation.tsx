@@ -23,17 +23,21 @@ import Dropzone from "react-dropzone";
 import { toast } from "sonner";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import { queryClient } from "@/lib/query-client"
 
 export default function GetCropRecommendationForm() {
   const { mutateAsync, isSuccess, data, reset } = useMutation({
     mutationKey: ["get-crop-recommendation"],
-    mutationFn: () => generateCropRecommendation(),
+    mutationFn: (formData: FormData) => generateCropRecommendation(formData),
   });
-  const queryClient = useQueryClient();
 
-  const handleGetCropRecommendation = async () => {
+  const handleGetCropRecommendation = async (acceptedFiles: File[]
+  ) => {
+    if (!acceptedFiles.length) return
     try {
-      toast.promise(mutateAsync(), {
+      const formData = new FormData()
+      formData.append("file", acceptedFiles[0])
+      toast.promise(mutateAsync(formData), {
         loading: "Getting expert recommendation...",
         success: (data) => data.message,
       });
@@ -51,9 +55,9 @@ export default function GetCropRecommendationForm() {
     <div>
       <h2 className="font-semibold leading-none tracking-tight mb-3">Get Crop Recommendation</h2>
       {isSuccess ? (
-        <Card className="border-green-500 bg-green-50">
+        <Card className="border-green-500 bg-green-50 dark:bg-green-900">
           <CardHeader>
-            <CardTitle className="text-green-600">Crop Recommendation</CardTitle>
+            <CardTitle className="text-green-600 dark:text-green-200">Crop Recommendation</CardTitle>
             <CardDescription>
               We have created a list of crops that would be best to grow in your soil.
             </CardDescription>

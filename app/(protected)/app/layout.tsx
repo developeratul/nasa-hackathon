@@ -39,7 +39,7 @@ export default function AppLayout(props: AppProps) {
               <GrowthSuggestion />
             </div>
           </aside>
-          <div className="w-full flex-1 bg-gray-50/70 p-6 overflow-x-hidden">{children}</div>
+          <div className="w-full flex-1 bg-gray-50/70 dark:bg-background p-6 overflow-x-hidden">{children}</div>
         </div>
       </div>
     </LocationProvider>

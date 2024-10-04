@@ -5,6 +5,7 @@ import { getRandomSoilType } from "@/helpers/soil";
 import { SoilType } from "@/types/soil";
 import { Database } from "@/types/supabase";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import axios from "axios";
 import { cookies } from "next/headers";
 
 interface SoilData {
@@ -13,42 +14,53 @@ interface SoilData {
   suggestion: string;
 }
 
-const soilData: SoilData[] = [
+const soilDataWithList: SoilData[] = [
   {
-    soilType: "Loamy",
-    list: ["Tomatoes", "Carrots", "Wheat", "Sugarcane"],
-    suggestion:
-      "Loamy soil is rich in nutrients, well-draining, and holds moisture effectively, making it ideal for a wide range of crops.",
+    soilType: 'Aluvial',
+    list: ['Rice', 'Wheat', 'Sugarcane', 'Cotton', 'Jute', 'Maize'],
+    suggestion: 'Aluvial soil is highly fertile and supports a wide range of crops. It is best for growing cereals like rice and wheat, especially in river valleys. Ensure proper irrigation for better yields.'
   },
   {
-    soilType: "Sandy",
-    list: ["Potatoes", "Peanuts", "Watermelons", "Carrots"],
-    suggestion:
-      "Sandy soil has excellent drainage but doesn't hold nutrients as well, so crops that don't require a lot of moisture thrive here.",
+    soilType: 'Kapur',
+    list: ['Olive', 'Grapes', 'Wheat', 'Barley', 'Almonds', 'Fig'],
+    suggestion: 'Kapur (calcareous or limestone) soil is ideal for crops like grapes and olives that thrive in well-drained, alkaline soils. Regular soil testing is advised to monitor pH levels and nutrient balance.'
   },
   {
-    soilType: "Clay",
-    list: ["Rice", "Lettuce", "Broccoli", "Kale"],
-    suggestion:
-      "Clay soil retains water well and is nutrient-rich, making it ideal for water-tolerant crops, but requires proper drainage management.",
+    soilType: 'Andosol',
+    list: ['Tea', 'Coffee', 'Potatoes', 'Maize', 'Barley'],
+    suggestion: 'Andosols are volcanic soils rich in organic material, retaining water well. They are ideal for crops like tea and coffee, but require regular fertilization due to rapid nutrient depletion.'
   },
   {
-    soilType: "Silty",
-    list: ["Corn", "Beans", "Cucumbers", "Spinach"],
-    suggestion:
-      "Silty soil is smooth and retains moisture, which helps support fast-growing crops that need plenty of water.",
+    soilType: 'Entisol',
+    list: ['Rice', 'Wheat', 'Millet', 'Sugarcane', 'Maize'],
+    suggestion: 'Entisols are young soils with little profile development, often found in river deltas. They can support a wide range of crops with adequate water and fertilization to compensate for their low natural fertility.'
   },
   {
-    soilType: "Peaty",
-    list: ["Potatoes", "Onions", "Cabbage", "Carrots"],
-    suggestion:
-      "Peaty soil is rich in organic matter and retains moisture well, but it can be acidic, so lime is often added to balance pH for vegetable crops.",
+    soilType: 'Laterit',
+    list: ['Rubber', 'Tea', 'Coconut', 'Coffee', 'Cashew', 'Pineapple'],
+    suggestion: 'Laterite soil is rich in iron and aluminum, suitable for crops like tea and rubber. Ensure good drainage and apply organic matter to improve fertility, as these soils can be nutrient-poor.'
   },
+  {
+    soilType: 'Pasir',
+    list: ['Cactus', 'Date Palm', 'Agave', 'Millet', 'Aloe Vera'],
+    suggestion: 'Pasir (sandy) soil has low water retention and is best suited for drought-tolerant plants like cacti and date palms. Add organic material or mulch to retain moisture and nutrients.'
+  },
+  {
+    soilType: 'Humus',
+    list: ['Vegetables', 'Fruits', 'Flowers', 'Cereals', 'Legumes'],
+    suggestion: 'Humus-rich soil is highly fertile, ideal for growing vegetables, fruits, and flowers. It retains moisture well and enhances root growth, but be sure to maintain its nutrient levels with compost or organic fertilizers.'
+  },
+  {
+    soilType: 'Inceptisol',
+    list: ['Rice', 'Tea', 'Sugarcane', 'Corn', 'Soybean'],
+    suggestion: 'Inceptisols are young, moderately developed soils found in a wide range of environments. They can support a variety of crops but require careful nutrient management and regular fertilization for high yields.'
+  }
 ];
 
-export async function generateCropRecommendation() {
-  const soilType = getRandomSoilType();
-  const data = soilData.find((item) => item.soilType === soilType);
+export async function generateCropRecommendation(formData: FormData) {
+try {
+  const { data } = await axios.post("http://127.0.0.1:8000/predict-soil-type", formData);
+  const soilData =soilDataWithList.find((item) => item.soilType === data.soil_type);
 
   const supabase = createServerActionClient<Database>({ cookies });
   const {
@@ -59,7 +71,7 @@ export async function generateCropRecommendation() {
 
   const query = await supabase
     .from("crop-suggestion")
-    .insert({ ...data, user_id: user.id })
+    .insert({ ...soilData, user_id: user.id })
     .select("*")
     .single();
 
@@ -67,9 +79,12 @@ export async function generateCropRecommendation() {
     throw new Error(query.error.message);
   }
 
-  await delay(5000);
-
   return { data: query.data, message: "Crop recommendation generated successfully" };
+} catch(err) {
+  console.log(err)
+  throw new Error((err as Error)?.message || "Unknown Error Occurred");
+
+}
 }
 
 export async function getCropRecommendations() {
@@ -80,7 +95,9 @@ export async function getCropRecommendations() {
 
   if (!user) throw new Error("You are not authorized");
 
-  const query = await supabase.from("crop-suggestion").select("*").eq("user_id", user.id);
+  const query = await supabase.from("crop-suggestion").select("*").eq("user_id", user.id).order("created_at", {
+    ascending: false
+  });
 
   if (query.error) {
     throw new Error(query.error.message);

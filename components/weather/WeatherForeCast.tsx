@@ -56,7 +56,7 @@ export default function WeatherForeCast() {
                     height={50}
                   />
                 </div>
-                <span className="text-base text-black font-medium">
+                <span className="text-base font-medium">
                   {kelvinToCelsius(forecast.temp)}
                   <sup>&deg;</sup>
                 </span>
